@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoldPriceController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\InventoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,5 +28,9 @@ Route::get('/billing',[BillingController::class,'index'])->name('billing.index')
 Route::get('/billing/create',[BillingController::class,'create'])->name('billing.create');
 Route::post('/billing',[BillingController::class,'store'])->name('billing.store');
 
+ 
+Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
+Route::get('/inventory/create', [InventoryController::class, 'create'])->name('inventory.create');
+Route::post('/inventory', [InventoryController::class, 'store'])->name('inventory.store');
 
 require __DIR__.'/auth.php';
