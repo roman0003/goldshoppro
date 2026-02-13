@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
 use App\Models\Billing;
-use App\Models\GoldPrice; // to get current gold rates
+use App\Models\Goldprice; // to get current gold rates
  
 class BillingController extends Controller
 {
@@ -16,7 +16,7 @@ class BillingController extends Controller
  
     public function create()
     {
-        $goldPrices = GoldPrice::all();
+        $goldPrices = Goldprice::all();
         return view('billing.create', compact('goldPrices'));
     }
  
@@ -28,7 +28,7 @@ class BillingController extends Controller
             'quantity' => 'required|numeric|min:0.01',
         ]);
  
-        $gold = GoldPrice::where('metal_type', $request->metal_type)->first();
+        $gold = Goldprice::where('metal_type', $request->metal_type)->first();
         $total = $gold->price_per_tola * $request->quantity;
  
         Billing::create([

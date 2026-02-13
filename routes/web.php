@@ -23,9 +23,9 @@ Route::get('/gold-price',[GoldPriceController::class,'index']);
 Route::get('/gold-price/create',[GoldPriceController::class,'create']);
 Route::post('/gold-price',[GoldPriceController::class,'store']);
 
-Route::get('/billing',[BillingController::class,'index']);
-Route::get('/billing/create',[BillingController::class,'create']);
-Route::post('/billing',[BillingController::class,'store']);
+Route::get('/billing',[BillingController::class,'index'])->name('billing.index');
+Route::get('/billing/create',[BillingController::class,'create'])->name('billing.create');
+Route::post('/billing',[BillingController::class,'store'])->name('billing.store');
 
 
 require __DIR__.'/auth.php';

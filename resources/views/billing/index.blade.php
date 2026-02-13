@@ -4,12 +4,20 @@
 <div class="p-6">
     <h2 class="text-3xl font-bold text-gray-700 mb-6">Bills</h2>
  
+    @if(session('success'))
+    <div class="mb-4 bg-green-100 text-green-700 px-4 py-2 rounded">
+        {{session('success')}}
+    </div>
+    @endif
+
     <div class="mb-4">
-        <a href=''billing.create') }}" class="bg-[#D4AF37] text-white px-4 py-2 rounded hover:bg-yellow-600 transition">
+        <a href="{{route('billing.create') }}" class="bg-[#D4AF37] text-white px-4 py-2 rounded hover:bg-yellow-600 transition">
             Add New Bill
         </a>
     </div>
- 
+    
+    
+
     <div class="overflow-x-auto bg-white shadow rounded-lg">
         <table class="min-w-full table-auto">
             <thead class="bg-gray-100">
