@@ -13,6 +13,12 @@
             </ul>
         </div>
     @endif
+
+    @if(session('error'))
+        <div class= "mb-4 bg-red-100 text-red-700 px-4 py-2 rounded">
+            {{session('error')}}
+        </div>
+    @endif  
  
     <form method="POST" action="{{ route('billing.store') }}">
         @csrf
