@@ -9,18 +9,27 @@ class GoldPriceController extends Controller
 {
     public function index()
     {
-        $prices = GoldPrice::all();
+        $prices = Goldprice::all();
         return view('gold-price.index',compact('prices'));
     }
 
-    public function create()
-    {
-        return void('gold-price.create');
-    }
+   public function create()
+{
+    return view('gold-price.create');
+}
+
 
     public function store(Request $request)
-    {
-        GoldPrice::create($request->all());
-        return redirect('/gold-price');
-    }
+{
+    $data = $request->validate([
+        'metal_type' => 'required|string|max:255',
+        'price_per_tola' => 'required|numeric|min:0',
+    ]);
+
+    Goldprice::create($data);
+
+    return redirect()->route('gold-price.index')
+        ->with('success', 'Gold price added successfully!');
+}
+
 }

@@ -4,7 +4,7 @@
 <div class="p-6 max-w-lg mx-auto bg-white shadow rounded-lg">
     <h2 class="text-2xl font-bold mb-6">Add Gold Price</h2>
  
-    <form method="POST" action="{{ route('gold.store') }}">
+    <form method="POST" action="{{ route('gold-price.store') }}">
         @csrf
         <div class="mb-4">
             <label class="block text-gray-700 mb-2">Metal Type</label>

@@ -13,31 +13,37 @@
             </ul>
         </div>
     @endif
-
+ 
     @if(session('error'))
-        <div class= "mb-4 bg-red-100 text-red-700 px-4 py-2 rounded">
-            {{session('error')}}
+        <div class="mb-4 bg-red-100 text-red-700 px-4 py-2 rounded">
+            {{ session('error') }}
         </div>
-    @endif  
+    @endif
  
     <form method="POST" action="{{ route('billing.store') }}">
         @csrf
  
         <div class="mb-4">
-            <label class="block text-gray-700 mb-2">Customer Name</label>
-            <input type="text" name="customer_name" required
-                class="w-full border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-[#D4AF37]">
-        </div>
+    <label class="block text-gray-700 mb-2">Customer Name</label>
+    <input type="text" name="customer_name" required
+        class="w-full border-gray-300 rounded px-3 py-2">
+</div>
+ 
+<div class="mb-4">
+    <label class="block text-gray-700 mb-2">Phone</label>
+    <input type="text" name="customer_phone"
+        class="w-full border-gray-300 rounded px-3 py-2">
+</div>
  
         <div class="mb-4">
             <label class="block text-gray-700 mb-2">Metal Type</label>
-            <select name="metal_type" id="metal_type" required
+            <select name="inventory_id" id="inventory_id" required
                 class="w-full border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-[#D4AF37]">
                 <option value="">Select Metal</option>
-                @foreach($goldPrices as $gold)
-                    <option value="{{ $gold->metal_type }}"
-                            data-price="{{ $gold->price_per_tola }}">
-                        {{ $gold->metal_type }} (Rs. {{ $gold->price_per_tola }})
+                @foreach($inventories as $inv)
+                    <option value="{{ $inv->id }}"
+                        data-price="{{ $inv->selling_price }}">
+                        {{ $inv->metal_type }} (Rs. {{ $inv->selling_price }})
                     </option>
                 @endforeach
             </select>
@@ -64,24 +70,24 @@
 </div>
  
 <script>
-    const metalSelect = document.getElementById('metal_type');
-    const quantityInput = document.getElementById('quantity');
-    const totalPreview = document.getElementById('total_preview');
+const inventorySelect = document.getElementById('inventory_id');
+const quantityInput = document.getElementById('quantity');
+const totalPreview = document.getElementById('total_preview');
  
-    function calculateTotal() {
-        const selectedOption = metalSelect.options[metalSelect.selectedIndex];
-        const price = selectedOption.getAttribute('data-price');
-        const quantity = quantityInput.value;
+function calculateTotal() {
+    const selectedOption = inventorySelect.options[inventorySelect.selectedIndex];
+    const price = selectedOption.getAttribute('data-price');
+    const quantity = quantityInput.value;
  
-        if (price && quantity) {
-            const total = price * quantity;
-            totalPreview.value = "Rs. " + total.toFixed(2);
-        } else {
-            totalPreview.value = "";
-        }
+    if (price && quantity) {
+        const total = price * quantity;
+        totalPreview.value = "Rs. " + total.toFixed(2);
+    } else {
+        totalPreview.value = "";
     }
+}
  
-    metalSelect.addEventListener('change', calculateTotal);
-    quantityInput.addEventListener('input', calculateTotal);
+inventorySelect.addEventListener('change', calculateTotal);
+quantityInput.addEventListener('input', calculateTotal);
 </script>
 @endsection
